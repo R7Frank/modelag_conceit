@@ -1,6 +1,5 @@
 package com.r7frank.modelag_conceit.resources;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
