@@ -23,7 +23,6 @@ public class CategoriaService {
 	}
 
 	public List<Categoria> listar() {
-
 		return catRep.findAll();
 	}
 }
