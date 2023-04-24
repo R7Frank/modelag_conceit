@@ -14,6 +14,7 @@ import com.r7frank.modelag_conceit.domain.Cliente;
 import com.r7frank.modelag_conceit.domain.Endereco;
 import com.r7frank.modelag_conceit.domain.Estado;
 import com.r7frank.modelag_conceit.domain.EstadoPagamento;
+import com.r7frank.modelag_conceit.domain.ItemPedido;
 import com.r7frank.modelag_conceit.domain.Pagamento;
 import com.r7frank.modelag_conceit.domain.PagamentoComBoleto;
 import com.r7frank.modelag_conceit.domain.PagamentoComCartao;
@@ -25,6 +26,7 @@ import com.r7frank.modelag_conceit.repositories.CidadeRepository;
 import com.r7frank.modelag_conceit.repositories.ClienteRepository;
 import com.r7frank.modelag_conceit.repositories.EnderecoRepository;
 import com.r7frank.modelag_conceit.repositories.EstadoRepository;
+import com.r7frank.modelag_conceit.repositories.ItemPedidoRepository;
 import com.r7frank.modelag_conceit.repositories.PagamentoRepository;
 import com.r7frank.modelag_conceit.repositories.PedidoRepository;
 import com.r7frank.modelag_conceit.repositories.ProdutoRepository;
@@ -48,7 +50,8 @@ public class ModelagConceitApplication implements CommandLineRunner {
 	private PedidoRepository pedidoRep;
 	@Autowired
 	private PagamentoRepository pagtoRep;
-	
+	@Autowired
+	private ItemPedidoRepository itemPedRep;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ModelagConceitApplication.class, args);
@@ -114,7 +117,19 @@ public class ModelagConceitApplication implements CommandLineRunner {
 		pedidoRep.saveAll(Arrays.asList(ped1, ped2));
 		pagtoRep.saveAll(Arrays.asList(pagto1, pagto2));
 		
-				
+		ItemPedido ip1 = new ItemPedido(ped1, p1, 0.00, 1, 2000.00);
+		ItemPedido ip2 = new ItemPedido(ped1, p3, 0.00, 2, 80.00);
+		ItemPedido ip3 = new ItemPedido(ped2, p2, 100.00, 1, 800.00);
+		
+		ped1.getItens().addAll(Arrays.asList(ip1, ip2));
+		ped2.getItens().addAll(Arrays.asList(ip3));
+		
+		p1.getItens().addAll(Arrays.asList(ip1));
+		p2.getItens().addAll(Arrays.asList(ip3));
+		p3.getItens().addAll(Arrays.asList(ip2));
+		
+		itemPedRep.saveAll(Arrays.asList(ip1, ip2, ip3));
+		
 	}
 
 }
