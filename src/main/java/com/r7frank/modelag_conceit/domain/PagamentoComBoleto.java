@@ -3,6 +3,7 @@ package com.r7frank.modelag_conceit.domain;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.r7frank.modelag_conceit.domain.enums.EstadoPagamento;
 
 import jakarta.persistence.Entity;
 

@@ -1,4 +1,4 @@
-package com.r7frank.modelag_conceit.domain;
+package com.r7frank.modelag_conceit.domain.enums;
 
 public enum EstadoPagamento {
 	

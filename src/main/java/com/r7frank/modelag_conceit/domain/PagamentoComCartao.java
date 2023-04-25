@@ -1,5 +1,7 @@
 package com.r7frank.modelag_conceit.domain;
 
+import com.r7frank.modelag_conceit.domain.enums.EstadoPagamento;
+
 import jakarta.persistence.Entity;
 
 @Entity
