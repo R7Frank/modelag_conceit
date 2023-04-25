@@ -20,7 +20,7 @@ public class ClienteResource {
 	private ClienteService clienteService;
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<?> find(@PathVariable Integer id) {
+	public ResponseEntity<Optional<Cliente>> find(@PathVariable Integer id) {
 		Optional<Cliente> obj = Optional.ofNullable(clienteService.find(id));
 			
 		return ResponseEntity.ok().body(obj);
