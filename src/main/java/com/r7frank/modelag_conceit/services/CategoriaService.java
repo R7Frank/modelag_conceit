@@ -3,6 +3,7 @@ package com.r7frank.modelag_conceit.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.r7frank.modelag_conceit.domain.Categoria;
@@ -30,4 +31,15 @@ public class CategoriaService {
 		find(obj.getId());
 		return catRep.save(obj);
 	}
+	
+	public void delete(Integer id) {
+		find(id);
+		try {
+			catRep.deleteById(id);
+	}
+		catch(DataIntegrityViolationException e) {
+			throw new com.r7frank.modelag_conceit.services.exceptions.DataIntegrityViolationException("Não é permitido excluir uma categoria que contenha produtos!");
+		}
+	}
+	
 }
