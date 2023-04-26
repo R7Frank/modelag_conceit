@@ -5,7 +5,11 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.r7frank.modelag_conceit.domain.Categoria;
 import com.r7frank.modelag_conceit.repositories.CategoriaRepository;
@@ -45,6 +49,12 @@ public class CategoriaService {
 
 	public List<Categoria> findAll() {
 		return catRep.findAll();
+	}
+	
+	public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		return catRep.findAll(pageRequest);
+		
 	}
 	
 }
