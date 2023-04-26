@@ -1,5 +1,6 @@
 package com.r7frank.modelag_conceit.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,10 @@ public class CategoriaService {
 		catch(DataIntegrityViolationException e) {
 			throw new com.r7frank.modelag_conceit.services.exceptions.DataIntegrityViolationException("Não é permitido excluir uma categoria que contenha produtos!");
 		}
+	}
+
+	public List<Categoria> findAll() {
+		return catRep.findAll();
 	}
 	
 }
