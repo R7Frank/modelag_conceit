@@ -7,8 +7,6 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +22,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.r7frank.modelag_conceit.domain.Categoria;
 import com.r7frank.modelag_conceit.dto.CategoriaDTO;
 import com.r7frank.modelag_conceit.services.CategoriaService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/categorias")
@@ -41,7 +41,8 @@ public class CategoriaResource {
 	}
 	
 	@PostMapping()
-	public ResponseEntity<Void> insert(@RequestBody Categoria obj) {
+	public ResponseEntity<Void> insert(@Valid @RequestBody CategoriaDTO objDto) {
+		Categoria obj = catServ.fromDTO(objDto);
 		obj = catServ.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(obj.getId()).toUri();
@@ -49,7 +50,8 @@ public class CategoriaResource {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Void> update(@RequestBody Categoria obj, @PathVariable Integer id) {
+	public ResponseEntity<Void> update(@Valid @RequestBody CategoriaDTO objDto, @PathVariable Integer id) {
+		Categoria obj = catServ.fromDTO(objDto);
 		obj.setId(id);
 		obj = catServ.update(obj);
 		return ResponseEntity.noContent().build();

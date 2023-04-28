@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.r7frank.modelag_conceit.domain.Categoria;
+import com.r7frank.modelag_conceit.dto.CategoriaDTO;
 import com.r7frank.modelag_conceit.repositories.CategoriaRepository;
 import com.r7frank.modelag_conceit.services.exceptions.ObjectNotFoundException;
 
@@ -54,6 +55,11 @@ public class CategoriaService {
 	public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return catRep.findAll(pageRequest);
+		
+	}
+	
+	public Categoria fromDTO(CategoriaDTO objDto) {
+		return new Categoria(objDto.getId(), objDto.getNome());
 		
 	}
 	
