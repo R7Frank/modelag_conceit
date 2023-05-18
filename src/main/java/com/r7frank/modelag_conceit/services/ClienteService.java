@@ -59,7 +59,7 @@ public class ClienteService {
 			cliRepos.deleteById(id);
 	}
 		catch(DataIntegrityViolationException e) {
-			throw new com.r7frank.modelag_conceit.services.exceptions.DataIntegrityViolationException("Não é permitido excluir um cliente que contenha entidades relacionadas a ele!");
+			throw new com.r7frank.modelag_conceit.services.exceptions.DataIntegrityViolationException("Não é permitido excluir um cliente que contenha pedidos vinculados a ele!");
 		}
 	}
 
